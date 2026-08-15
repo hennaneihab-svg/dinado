@@ -38,12 +38,14 @@ export default function Footer() {
 
           {/* ---- Logo + Description ---- */}
           <div className="space-y-5">
-            <motion.img
-              src={logo}
-              alt="DIDANO LUXE CARS"
-              className="h-16 w-auto object-contain"
-              whileHover={{ scale: 1.03 }}
-            />
+            <div className="inline-block p-3 rounded-2xl bg-[#291D14]/90 border border-[#9E7C3D]/30 shadow-lg shadow-[#CCA64F]/10">
+              <motion.img
+                src={logo}
+                alt="DIDANO LUXE CARS"
+                className="h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(204,166,79,0.3)]"
+                whileHover={{ scale: 1.03 }}
+              />
+            </div>
             <p className="text-text-warm text-sm leading-relaxed max-w-xs">
               {t.footer.desc}
             </p>

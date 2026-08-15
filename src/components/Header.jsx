@@ -71,7 +71,7 @@ export default function Header() {
               <img
                 src={logo}
                 alt="DIDANO LUXE CARS - Location de voiture à Oran"
-                className="h-12 md:h-14 w-auto object-contain"
+                className="h-12 md:h-14 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(204,166,79,0.35)]"
               />
             </motion.div>
 

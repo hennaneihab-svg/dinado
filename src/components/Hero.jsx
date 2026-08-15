@@ -25,17 +25,17 @@ export default function Hero() {
       id="accueil"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* ---- Fond : image hero + overlay dégradé ---- */}
+      {/* ---- Fond : image Santa Cruz Oran (mode sombre luxe) ---- */}
       <div className="absolute inset-0">
         <img
-          src="/hero_bg.jpg"
-          alt="Voiture de luxe DIDANO LUXE CARS à Oran"
-          className="w-full h-full object-cover object-center"
+          src="/dinado/oran_santa_cruz.jpg"
+          alt="Santa Cruz Oran — DIDANO LUXE CARS"
+          className="w-full h-full object-cover object-center scale-105 filter brightness-50 contrast-125 saturate-90"
           loading="eager"
         />
-        {/* Overlay sombre doré */}
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-bg/80 via-dark-bg/60 to-dark-bg/95" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark-bg/70 via-transparent to-dark-bg/30" />
+        {/* Multilayer dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0705]/90 via-[#0F0705]/70 to-[#0F0705]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0705]/95 via-[#0F0705]/60 to-[#0F0705]/80" />
       </div>
 
       {/* ---- Particules décoratives dorées ---- */}
