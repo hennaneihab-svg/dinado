@@ -1,6 +1,6 @@
 import { LanguageProvider } from './context/LanguageContext'
 import { ToastProvider } from './context/ToastContext'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 
 // Public components
 import Header         from './components/Header'
@@ -43,7 +43,7 @@ function PublicSite() {
 export default function App() {
   return (
     <ToastProvider>
-      <BrowserRouter basename="/dinado">
+      <HashRouter>
         <Routes>
           {/* Site Public */}
           <Route path="/" element={<PublicSite />} />
@@ -61,7 +61,7 @@ export default function App() {
             <Route path="settings" element={<SettingsPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </ToastProvider>
   )
 }
