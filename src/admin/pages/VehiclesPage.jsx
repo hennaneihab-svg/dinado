@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Edit, Trash2, X, Car } from 'lucide-react'
+import { Plus, Edit, Trash2, X, Car, Upload, Image as ImageIcon } from 'lucide-react'
 import { mockVehicles } from '../../data/mockData'
 import { useToast } from '../../context/ToastContext'
 
@@ -18,11 +18,15 @@ export default function VehiclesPage() {
     price: '',
     status: 'available',
     gearbox: 'Automatique',
+    image: null,
   })
+
+  const [imagePreview, setImagePreview] = useState(null)
 
   const openAddModal = () => {
     setEditingVehicle(null)
-    setFormData({ name: '', category: 'eco', price: '', status: 'available', gearbox: 'Automatique' })
+    setFormData({ name: '', category: 'eco', price: '', status: 'available', gearbox: 'Automatique', image: null })
+    setImagePreview(null)
     setIsModalOpen(true)
   }
 
@@ -34,8 +38,19 @@ export default function VehiclesPage() {
       price: vehicle.price,
       status: vehicle.status,
       gearbox: vehicle.gearbox || 'Automatique',
+      image: vehicle.image || null,
     })
+    setImagePreview(vehicle.image || null)
     setIsModalOpen(true)
+  }
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      setImagePreview(imageUrl)
+      setFormData(prev => ({ ...prev, image: imageUrl }))
+    }
   }
 
   const handleDelete = (id, name) => {
@@ -56,7 +71,6 @@ export default function VehiclesPage() {
         id: Date.now(),
         ...formData,
         price: Number(formData.price),
-        image: null,
       }
       setVehicles([newVeh, ...vehicles])
       addToast(`Véhicule "${formData.name}" ajouté avec succès`, 'success')
@@ -83,7 +97,7 @@ export default function VehiclesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-display font-bold text-[#F5F0E6]">Gestion de la Flotte</h1>
-          <p className="text-[#C9C0B3] text-sm mt-1">Gérez vos véhicules, leurs tarifs et leurs disponibilités</p>
+          <p className="text-[#C9C0B3] text-sm mt-1">Gérez vos véhicules, photos, tarifs et disponibilités</p>
         </div>
         <button
           onClick={openAddModal}
@@ -160,7 +174,7 @@ export default function VehiclesPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md bg-[#291D14] border border-[#9E7C3D]/30 rounded-2xl p-6 shadow-2xl relative"
+              className="w-full max-w-md bg-[#291D14] border border-[#9E7C3D]/30 rounded-2xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto"
             >
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -174,6 +188,34 @@ export default function VehiclesPage() {
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-4">
+
+                {/* Upload Photo */}
+                <div>
+                  <label className="block text-xs font-semibold uppercase text-[#C9C0B3] mb-2">Photo du véhicule</label>
+                  <div className="relative border-2 border-dashed border-[#9E7C3D]/40 hover:border-[#CCA64F] rounded-xl p-4 text-center cursor-pointer transition-colors bg-[#0F0705]">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                    />
+                    {imagePreview ? (
+                      <div className="relative h-32 w-full rounded-lg overflow-hidden">
+                        <img src={imagePreview} alt="Aperçu" className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-xs text-white font-medium opacity-0 hover:opacity-100 transition-opacity">
+                          Changer la photo
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="py-4 space-y-2">
+                        <Upload size={28} className="mx-auto text-[#CCA64F]" />
+                        <p className="text-xs text-[#F5F0E6] font-medium">Cliquez ou glissez une image ici</p>
+                        <p className="text-[10px] text-[#C9C0B3]">JPG, PNG jusqu'à 5MB</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-xs font-semibold uppercase text-[#C9C0B3] mb-1">Nom du modèle</label>
                   <input

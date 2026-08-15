@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Users, Settings, Wind } from 'lucide-react'
+import { Users, Settings, Wind, Calendar, CheckCircle2, AlertCircle, X, ShieldCheck } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
 
 // Import images véhicules
@@ -10,10 +10,8 @@ import imgGolf    from '../assets/vehicles/vw_golf.jpg'
 import imgKodiaq  from '../assets/vehicles/skoda_kodiaq.jpg'
 import imgTiguan  from '../assets/vehicles/vw_tiguan.jpg'
 
-const WHATSAPP_NUMBER = '213550000000'
-
-// ---- Catalogue véhicules ----
-const vehicles = [
+// ---- Catalogue véhicules avec statut de disponibilité ----
+const initialVehicles = [
   {
     id:       1,
     name:     'Dacia Duster',
@@ -21,6 +19,7 @@ const vehicles = [
     price:    3500,
     seats:    5,
     gearbox:  'manual',
+    status:   'available', // disponible
     image:    imgDuster,
     alt:      'Location Dacia Duster Oran Algérie',
   },
@@ -31,6 +30,7 @@ const vehicles = [
     price:    3000,
     seats:    5,
     gearbox:  'manual',
+    status:   'rented', // loué
     image:    imgP208,
     alt:      'Location Peugeot 208 Oran',
   },
@@ -41,6 +41,7 @@ const vehicles = [
     price:    5500,
     seats:    5,
     gearbox:  'auto',
+    status:   'available',
     image:    imgGolf,
     alt:      'Location Volkswagen Golf Oran Algérie',
   },
@@ -51,6 +52,7 @@ const vehicles = [
     price:    7500,
     seats:    7,
     gearbox:  'auto',
+    status:   'rented',
     image:    imgKodiaq,
     alt:      'Location SUV Škoda Kodiaq Oran',
   },
@@ -61,6 +63,7 @@ const vehicles = [
     price:    7000,
     seats:    5,
     gearbox:  'auto',
+    status:   'maintenance',
     image:    imgTiguan,
     alt:      'Location SUV Volkswagen Tiguan Oran',
   },
@@ -71,7 +74,8 @@ const vehicles = [
     price:   14000,
     seats:    5,
     gearbox:  'auto',
-    image:    null, // Gradient fallback
+    status:   'available',
+    image:    null,
     alt:      'Location Porsche Macan luxe Oran Algérie',
   },
   {
@@ -81,12 +85,12 @@ const vehicles = [
     price:   15000,
     seats:    5,
     gearbox:  'auto',
-    image:    null, // Gradient fallback
+    status:   'rented',
+    image:    null,
     alt:      'Location Range Rover Evoque luxe Oran',
   },
 ]
 
-// Dégradés de fond premium pour véhicules sans image générée
 const luxeFallbacks = {
   6: 'linear-gradient(135deg, #1a0a05 0%, #2d1a0a 30%, #3d2510 60%, #291208 100%)',
   7: 'linear-gradient(135deg, #0a0510 0%, #1a0a20 30%, #2a1035 60%, #15082a 100%)',
@@ -94,7 +98,6 @@ const luxeFallbacks = {
 
 const categories = ['all', 'eco', 'confort', 'suv', 'luxe']
 
-// Badge couleur par catégorie
 const categoryColor = {
   eco:     'text-emerald-400 border-emerald-400/30 bg-emerald-400/10',
   confort: 'text-blue-300 border-blue-300/30 bg-blue-300/10',
@@ -102,9 +105,9 @@ const categoryColor = {
   luxe:    'text-gold-light border-gold/30 bg-gold/10',
 }
 
-function VehicleCard({ vehicle, t }) {
-  const waMsg = encodeURIComponent(`Bonjour, je souhaite réserver un ${vehicle.name} chez DIDANO LUXE CARS`)
+function VehicleCard({ vehicle, t, onSelectBook }) {
   const catKey = { eco: 'eco', confort: 'confort', suv: 'suv', luxe: 'luxe' }[vehicle.category]
+  const isAvailable = vehicle.status === 'available'
 
   return (
     <motion.div
@@ -129,7 +132,6 @@ function VehicleCard({ vehicle, t }) {
             className="w-full h-full flex items-center justify-center"
             style={{ background: luxeFallbacks[vehicle.id] }}
           >
-            {/* Car silhouette SVG */}
             <svg viewBox="0 0 200 80" fill="none" className="w-40 opacity-30">
               <path d="M30 55 Q50 35 80 32 Q110 28 130 32 Q155 35 170 55 L175 65 L25 65 Z" fill="#CCA64F" />
               <path d="M70 32 Q80 20 100 18 Q120 16 130 32" fill="#9E7C3D" />
@@ -139,7 +141,6 @@ function VehicleCard({ vehicle, t }) {
           </div>
         )}
 
-        {/* Overlay gradient bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-dark-bg-alt/80 via-transparent to-transparent" />
 
         {/* Badge catégorie */}
@@ -147,6 +148,24 @@ function VehicleCard({ vehicle, t }) {
           <span className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full border ${categoryColor[vehicle.category]}`}>
             {t.fleet[catKey]}
           </span>
+        </div>
+
+        {/* Badge Disponibilité en direct */}
+        <div className={`absolute top-3 ${document.documentElement.dir === 'rtl' ? 'left-3' : 'right-3'}`}>
+          {isAvailable ? (
+            <span className="flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Disponible
+            </span>
+          ) : vehicle.status === 'rented' ? (
+            <span className="flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 backdrop-blur-md">
+              Réservé
+            </span>
+          ) : (
+            <span className="flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/40 backdrop-blur-md">
+              En maintenance
+            </span>
+          )}
         </div>
       </div>
 
@@ -180,17 +199,25 @@ function VehicleCard({ vehicle, t }) {
           <span className="text-sm text-text-warm font-medium">DZD {t.fleet.perDay}</span>
         </div>
 
-        {/* CTA Réserver */}
-        <motion.a
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.97 }}
-          className="btn-gold w-full text-center text-sm"
-        >
-          {t.fleet.reserve}
-        </motion.a>
+        {/* CTA Réserver directement */}
+        {isAvailable ? (
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => onSelectBook(vehicle)}
+            className="btn-gold w-full text-center text-sm font-semibold py-3 flex items-center justify-center gap-2"
+          >
+            <Calendar size={16} />
+            Réserver ce véhicule
+          </motion.button>
+        ) : (
+          <button
+            disabled
+            className="w-full text-center text-sm font-semibold py-3 rounded-lg bg-dark-bg border border-gold/10 text-text-muted cursor-not-allowed"
+          >
+            Non disponible actuellement
+          </button>
+        )}
       </div>
     </motion.div>
   )
@@ -199,10 +226,29 @@ function VehicleCard({ vehicle, t }) {
 export default function Fleet() {
   const { t } = useLang()
   const [activeFilter, setActiveFilter] = useState('all')
+  const [bookingVehicle, setBookingVehicle] = useState(null)
+  const [bookingSuccess, setBookingSuccess] = useState(false)
+
+  const [bookingForm, setBookingForm] = useState({
+    name: '',
+    phone: '',
+    startDate: '',
+    endDate: '',
+  })
 
   const filtered = activeFilter === 'all'
-    ? vehicles
-    : vehicles.filter(v => v.category === activeFilter)
+    ? initialVehicles
+    : initialVehicles.filter(v => v.category === activeFilter)
+
+  const handleBookSubmit = (e) => {
+    e.preventDefault()
+    setBookingSuccess(true)
+    setTimeout(() => {
+      setBookingSuccess(false)
+      setBookingVehicle(null)
+      setBookingForm({ name: '', phone: '', startDate: '', endDate: '' })
+    }, 3000)
+  }
 
   return (
     <section id="flotte" className="py-24 bg-gradient-to-b from-dark-bg to-dark-bg-alt">
@@ -241,11 +287,129 @@ export default function Fleet() {
         >
           <AnimatePresence mode="popLayout">
             {filtered.map(vehicle => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} t={t} />
+              <VehicleCard
+                key={vehicle.id}
+                vehicle={vehicle}
+                t={t}
+                onSelectBook={(v) => setBookingVehicle(v)}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
+
+      {/* Modale de Réservation Directe */}
+      <AnimatePresence>
+        {bookingVehicle && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0F0705]/85 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full max-w-lg bg-[#291D14] border border-[#CCA64F]/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative"
+            >
+              <button
+                onClick={() => setBookingVehicle(null)}
+                className="absolute top-5 right-5 text-text-warm hover:text-ivory"
+              >
+                <X size={22} />
+              </button>
+
+              {bookingSuccess ? (
+                <div className="py-8 text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
+                    <CheckCircle2 size={36} />
+                  </div>
+                  <h3 className="text-2xl font-display font-bold text-ivory">Réservation Envoyée !</h3>
+                  <p className="text-sm text-text-warm max-w-xs mx-auto">
+                    Votre demande de réservation pour <strong className="text-gold">{bookingVehicle.name}</strong> a bien été enregistrée. Notre équipe vous contactera sous peu.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="mb-6">
+                    <span className="text-xs uppercase tracking-wider text-gold font-semibold">Réservation Directe</span>
+                    <h3 className="text-2xl font-display font-bold text-ivory mt-1">{bookingVehicle.name}</h3>
+                    <p className="text-sm text-gold font-bold mt-1">
+                      {bookingVehicle.price.toLocaleString('fr-DZ')} DZD <span className="text-xs text-text-warm font-normal">/ jour</span>
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleBookSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-text-warm mb-1">Nom et Prénom</label>
+                      <input
+                        type="text"
+                        required
+                        value={bookingForm.name}
+                        onChange={e => setBookingForm({ ...bookingForm, name: e.target.value })}
+                        placeholder="ex. Mohamed Amrani"
+                        className="form-input"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-text-warm mb-1">Numéro de Téléphone</label>
+                      <input
+                        type="tel"
+                        required
+                        value={bookingForm.phone}
+                        onChange={e => setBookingForm({ ...bookingForm, phone: e.target.value })}
+                        placeholder="+213 5XX XXX XXX"
+                        className="form-input"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold uppercase text-text-warm mb-1">Date de début</label>
+                        <input
+                          type="date"
+                          required
+                          value={bookingForm.startDate}
+                          onChange={e => setBookingForm({ ...bookingForm, startDate: e.target.value })}
+                          className="form-input text-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold uppercase text-text-warm mb-1">Date de fin</label>
+                        <input
+                          type="date"
+                          required
+                          value={bookingForm.endDate}
+                          onChange={e => setBookingForm({ ...bookingForm, endDate: e.target.value })}
+                          className="form-input text-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl bg-gold/10 border border-gold/20 flex items-center gap-3 text-xs text-text-warm mt-4">
+                      <ShieldCheck size={20} className="text-gold flex-shrink-0" />
+                      <span>Assurance tous risques incluse — Aucune carte bancaire requise.</span>
+                    </div>
+
+                    <div className="pt-2 flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setBookingVehicle(null)}
+                        className="flex-1 py-3.5 border border-gold/20 rounded-xl text-sm font-semibold text-text-warm hover:bg-dark-bg"
+                      >
+                        Annuler
+                      </button>
+                      <button
+                        type="submit"
+                        className="flex-1 btn-gold py-3.5 text-sm font-semibold"
+                      >
+                        Confirmer la réservation
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
