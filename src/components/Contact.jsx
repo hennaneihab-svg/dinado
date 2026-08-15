@@ -178,11 +178,11 @@ export default function Contact() {
               })}
             </div>
 
-            {/* Placeholder Google Maps — Oran */}
-            <div className="rounded-2xl overflow-hidden border border-gold/15 h-64 relative">
+            {/* Google Maps interactif — DIDANO LUXE CARS */}
+            <div className="rounded-2xl overflow-hidden border border-gold/25 h-64 relative group cursor-pointer">
               <iframe
                 title="DIDANO LUXE CARS — Oran, Algérie"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000!2d-0.6331!3d35.6969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7c9f5dcf60a7b1%3A0x7e4a7b1e2b0a4c3!2sOran%2C%20Algeria!5e0!3m2!1sfr!2sdz!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3248.916124765952!2d-0.630000!3d35.698000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQxJzUyLjgiTiAwwrAzNyc0OC4wIlc!5e0!3m2!1sfr!2sdz!4v1620000000000!5m2!1sfr!2sdz"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.9)' }}
@@ -190,9 +190,35 @@ export default function Contact() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-              {/* Overlay doré subtil */}
+              
+              {/* Pin repère de position stylisé au centre */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none flex flex-col items-center">
+                <div className="w-10 h-10 rounded-full bg-[#0F0705] border-2 border-[#CCA64F] flex items-center justify-center shadow-2xl animate-bounce">
+                  <MapPin size={22} className="text-[#CCA64F]" />
+                </div>
+                <div className="mt-1 px-3 py-1 bg-[#0F0705]/90 border border-[#CCA64F]/50 rounded-full text-[10px] font-bold text-[#F0D675] shadow-lg">
+                  DIDANO LUXE CARS
+                </div>
+              </div>
+
+              {/* Bouton d'ouverture direct vers le lien Google Maps exact */}
+              <a
+                href="https://maps.app.goo.gl/5GbCrL3it6Q1ZMtR6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-3 right-3 z-10 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#0F0705] bg-gradient-to-r from-[#CCA64F] to-[#F0D675] hover:scale-105 transition-all shadow-xl flex items-center gap-1.5"
+              >
+                <span>Ouvrir dans Maps</span>
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+
+              {/* Overlay d'ombre bas */}
               <div className="absolute inset-0 pointer-events-none"
-                style={{ background: 'linear-gradient(to top, rgba(15,7,5,0.4) 0%, transparent 50%)' }} />
+                style={{ background: 'linear-gradient(to top, rgba(15,7,5,0.5) 0%, transparent 40%)' }} />
             </div>
           </motion.div>
         </div>
