@@ -50,6 +50,7 @@ export default function App() {
 
           {/* Admin Login */}
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/login" element={<AdminLogin />} />
 
           {/* Admin Protected Dashboard */}
           <Route path="/admin" element={<AdminLayout />}>
@@ -60,6 +61,9 @@ export default function App() {
             <Route path="clients" element={<ClientsPage />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>
+
+          {/* Fallback Site Public */}
+          <Route path="*" element={<PublicSite />} />
         </Routes>
       </HashRouter>
     </ToastProvider>

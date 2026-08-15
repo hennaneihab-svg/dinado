@@ -114,6 +114,14 @@ export default function Header() {
               {/* Séparateur */}
               <div className="w-px h-5 bg-gold/20" />
 
+              {/* Bouton Espace Admin */}
+              <a
+                href="#/admin/login"
+                className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/40 text-gold-light hover:bg-gold/20 transition-all duration-300 flex items-center gap-1.5"
+              >
+                <span>🔑 Admin</span>
+              </a>
+
               {/* Sélecteur de langue */}
               <button
                 onClick={toggleLang}
