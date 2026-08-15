@@ -18,8 +18,6 @@ const FacebookIcon = ({ size = 18 }) => (
 )
 import logo from '../assets/logo/DIDANO_logo_transparent.png'
 
-const WHATSAPP_NUMBER = '213550000000'
-
 const navLinks = [
   { key: 'home',        href: '#accueil'       },
   { key: 'fleet',       href: '#flotte'        },
@@ -59,7 +57,7 @@ export default function Header() {
         <div className="w-full max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-14 md:h-16 gap-2">
 
-            {/* ---- Logo Responsive (Largeur contrôlée) ---- */}
+            {/* ---- Logo ---- */}
             <div
               className="cursor-pointer flex items-center flex-shrink-0"
               onClick={() => handleNav('#accueil')}
@@ -71,7 +69,7 @@ export default function Header() {
               />
             </div>
 
-            {/* ---- Navigation Desktop (Visibles uniquement au-dessus de 1150px) ---- */}
+            {/* ---- Navigation Desktop ---- */}
             <nav className="hidden xl:flex items-center gap-7">
               {navLinks.map((link) => (
                 <button
@@ -92,10 +90,10 @@ export default function Header() {
               <div className="w-px h-4 bg-gold/20 mx-1" />
               <a href="#/admin/login" className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/40 text-gold-light hover:bg-gold/20 transition-all flex items-center gap-1"><Lock size={12} /><span>Admin</span></a>
               <button onClick={toggleLang} className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-all"><span>{lang === 'fr' ? '🇩🇿 AR' : '🇫🇷 FR'}</span></button>
-              <motion.a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20v%C3%A9hicule%20chez%20DIDANO%20LUXE%20CARS`} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="btn-gold text-xs font-semibold px-4 py-2">{t.nav.reserve}</motion.a>
+              <motion.button onClick={() => handleNav('#flotte')} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="btn-gold text-xs font-semibold px-4 py-2">{t.nav.reserve}</motion.button>
             </div>
 
-            {/* ---- Actions Mobile & Tablette (Boutons bien alignés à droite) ---- */}
+            {/* ---- Actions Mobile & Tablette ---- */}
             <div className="flex items-center gap-2 flex-shrink-0 xl:hidden">
               <button
                 onClick={toggleLang}
@@ -109,14 +107,14 @@ export default function Header() {
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label="Menu"
               >
-                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
       </motion.header>
 
-      {/* ---- Menu Mobile & Tablette Pliable ---- */}
+      {/* ---- Menu Mobile Pliable ---- */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -154,14 +152,12 @@ export default function Header() {
                 </a>
               </div>
 
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20v%C3%A9hicule%20chez%20DIDANO%20LUXE%20CARS`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => handleNav('#flotte')}
                 className="btn-gold w-full text-center text-xs font-bold py-3 mt-2"
               >
                 {t.nav.reserve}
-              </a>
+              </button>
             </div>
           </motion.div>
         )}
