@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Shield, Lock } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
 
-// SVG réseaux sociaux (lucide-react ne les exporte plus)
+// SVG réseaux sociaux
 const InstagramIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -18,7 +18,6 @@ const FacebookIcon = ({ size = 18 }) => (
 )
 import logo from '../assets/logo/DIDANO_logo_transparent.png'
 
-// Numéro WhatsApp de l'agence — modifier ici
 const WHATSAPP_NUMBER = '213550000000'
 
 const navLinks = [
@@ -33,11 +32,9 @@ export default function Header() {
   const { t, lang, toggleLang } = useLang()
   const [scrolled,     setScrolled]     = useState(false)
   const [mobileOpen,   setMobileOpen]   = useState(false)
-  const [activeSection,setActiveSection] = useState('accueil')
 
-  // Opacité header au scroll
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -52,31 +49,31 @@ export default function Header() {
       <motion.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-dark-bg/95 backdrop-blur-md border-b border-gold/10 shadow-lg shadow-black/30'
-            : 'bg-transparent'
+            ? 'bg-[#0F0705]/95 backdrop-blur-xl border-b border-[#9E7C3D]/25 shadow-xl shadow-black/50 py-2'
+            : 'bg-gradient-to-b from-[#0F0705]/90 via-[#0F0705]/50 to-transparent py-3 md:py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 md:h-16">
 
-            {/* ---- Logo ---- */}
+            {/* ---- Logo Responsive ---- */}
             <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="flex-shrink-0 cursor-pointer"
+              whileHover={{ scale: 1.02 }}
+              className="flex-shrink-0 cursor-pointer flex items-center"
               onClick={() => handleNav('#accueil')}
             >
               <img
                 src={logo}
-                alt="DIDANO LUXE CARS - Location de voiture à Oran"
-                className="h-12 md:h-14 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(204,166,79,0.35)]"
+                alt="DIDANO LUXE CARS - Oran"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(204,166,79,0.4)]"
               />
             </motion.div>
 
             {/* ---- Navigation Desktop ---- */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-7">
               {navLinks.map((link) => (
                 <button
                   key={link.key}
@@ -90,14 +87,13 @@ export default function Header() {
             </nav>
 
             {/* ---- Actions Desktop ---- */}
-            <div className="hidden lg:flex items-center gap-4">
-              {/* Réseaux sociaux */}
+            <div className="hidden lg:flex items-center gap-3">
               <a
                 href="https://www.instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-warm hover:text-gold-light transition-colors duration-300"
-                aria-label="Instagram DIDANO LUXE CARS"
+                className="text-text-warm hover:text-gold-light transition-colors p-1"
+                aria-label="Instagram"
               >
                 <InstagramIcon size={18} />
               </a>
@@ -105,94 +101,105 @@ export default function Header() {
                 href="https://www.facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-warm hover:text-gold-light transition-colors duration-300"
-                aria-label="Facebook DIDANO LUXE CARS"
+                className="text-text-warm hover:text-gold-light transition-colors p-1"
+                aria-label="Facebook"
               >
                 <FacebookIcon size={18} />
               </a>
 
-              {/* Séparateur */}
-              <div className="w-px h-5 bg-gold/20" />
+              <div className="w-px h-4 bg-gold/20 mx-1" />
 
-              {/* Bouton Espace Admin */}
               <a
                 href="#/admin/login"
-                className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/40 text-gold-light hover:bg-gold/20 transition-all duration-300 flex items-center gap-1.5"
+                className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/40 text-gold-light hover:bg-gold/20 transition-all flex items-center gap-1"
               >
-                <span>🔑 Admin</span>
+                <Lock size={12} />
+                <span>Admin</span>
               </a>
 
-              {/* Sélecteur de langue */}
               <button
                 onClick={toggleLang}
-                className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-all duration-300"
-                aria-label="Changer de langue"
+                className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-all"
               >
                 <span>{lang === 'fr' ? '🇩🇿 AR' : '🇫🇷 FR'}</span>
               </button>
 
-              {/* CTA Réserver */}
               <motion.a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20v%C3%A9hicule%20chez%20DIDANO%20LUXE%20CARS`}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.04 }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="btn-gold text-sm px-5 py-2.5"
+                className="btn-gold text-xs font-semibold px-4 py-2"
               >
                 {t.nav.reserve}
               </motion.a>
             </div>
 
-            {/* ---- Hamburger Mobile ---- */}
-            <button
-              className="lg:hidden text-ivory p-2 rounded-lg hover:bg-gold/10 transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Menu"
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* ---- Actions Compactes Mobile (Langue + Hamburger) ---- */}
+            <div className="flex items-center gap-2 lg:hidden">
+              <button
+                onClick={toggleLang}
+                className="text-[11px] font-bold uppercase px-2.5 py-1 rounded-full border border-gold/40 text-gold bg-gold/5"
+              >
+                {lang === 'fr' ? 'AR' : 'FR'}
+              </button>
+
+              <button
+                className="text-ivory p-2 rounded-xl border border-gold/20 bg-dark-bg/80 hover:bg-gold/10 transition-colors"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Menu"
+              >
+                {mobileOpen ? <X size={22} className="text-gold" /> : <Menu size={22} className="text-gold" />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.header>
 
-      {/* ---- Menu Mobile ---- */}
+      {/* ---- Menu Mobile Pliable et bien dimensionné ---- */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-            className="fixed top-20 left-0 right-0 z-40 bg-dark-bg/98 backdrop-blur-xl border-b border-gold/10 lg:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed top-16 left-0 right-0 z-40 bg-[#0F0705]/98 backdrop-blur-2xl border-b border-[#9E7C3D]/30 lg:hidden shadow-2xl overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col gap-4">
+            <div className="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-3">
               {navLinks.map((link, i) => (
-                <motion.button
+                <button
                   key={link.key}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
                   onClick={() => handleNav(link.href)}
-                  className="text-left text-ivory text-base font-medium py-2 border-b border-gold/10 hover:text-gold-light transition-colors"
+                  className="text-left text-ivory text-base font-medium py-2.5 border-b border-gold/10 hover:text-gold-light transition-colors flex items-center justify-between"
                 >
-                  {t.nav[link.key]}
-                </motion.button>
+                  <span>{t.nav[link.key]}</span>
+                  <span className="text-gold/40 text-xs">→</span>
+                </button>
               ))}
 
-              <div className="flex items-center gap-4 pt-2">
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light transition-colors"><InstagramIcon size={20} /></a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light transition-colors"><FacebookIcon size={20} /></a>
-                <button onClick={toggleLang} className="ml-auto text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-all">
-                  {lang === 'fr' ? '🇩🇿 AR' : '🇫🇷 FR'}
-                </button>
+              <div className="flex items-center justify-between pt-2">
+                <div className="flex items-center gap-3">
+                  <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><InstagramIcon size={18} /></a>
+                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><FacebookIcon size={18} /></a>
+                </div>
+
+                <a
+                  href="#/admin/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-xs font-semibold px-3 py-1.5 rounded-full border border-gold/40 text-gold-light bg-gold/10 flex items-center gap-1"
+                >
+                  <Lock size={12} />
+                  <span>Espace Admin</span>
+                </a>
               </div>
 
               <motion.a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20v%C3%A9hicule%20chez%20DIDANO%20LUXE%20CARS`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold w-full text-center"
+                className="btn-gold w-full text-center text-sm font-semibold py-3 mt-2"
               >
                 {t.nav.reserve}
               </motion.a>
