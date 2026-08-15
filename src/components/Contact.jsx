@@ -23,11 +23,11 @@ export default function Contact() {
   }
 
   const contactInfo = [
-    { icon: MapPin,         label: t.contact.address, value: t.contact.addressVal },
-    { icon: Phone,          label: t.contact.tel,     value: '+213 5 50 00 00 00' },
-    { icon: MessageCircle,  label: t.contact.whatsapp,value: '+213 5 50 00 00 00' },
-    { icon: Mail,           label: 'Email',            value: 'contact@didanoluxecars.dz' },
-    { icon: Clock,          label: t.contact.hours,    value: t.contact.hoursVal },
+    { icon: MapPin,         label: t.contact.address, value: t.contact.addressVal, link: 'https://maps.app.goo.gl/5GbCrL3it6Q1ZMtR6' },
+    { icon: Phone,          label: t.contact.tel,     value: '+213 770 36 64 05', link: 'tel:+213770366405' },
+    { icon: MessageCircle,  label: t.contact.whatsapp,value: '+213 770 36 64 05', link: 'https://wa.me/213770366405' },
+    { icon: Mail,           label: 'Email',            value: 'contact@didanoluxecars.dz', link: 'mailto:contact@didanoluxecars.dz' },
+    { icon: Clock,          label: t.contact.hours,    value: t.contact.hoursVal, link: null },
   ]
 
   return (
@@ -155,18 +155,27 @@ export default function Contact() {
           >
             {/* Infos de contact */}
             <div className="glass-card rounded-2xl p-6 space-y-5">
-              {contactInfo.map(({ icon: Icon, label, value }, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'rgba(204,166,79,0.12)', border: '1px solid rgba(204,166,79,0.25)' }}>
-                    <Icon size={18} className="text-gold" />
+              {contactInfo.map(({ icon: Icon, label, value, link }, i) => {
+                const content = (
+                  <div className="flex items-start gap-4 group cursor-pointer">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#CCA64F]/20 transition-colors"
+                      style={{ background: 'rgba(204,166,79,0.12)', border: '1px solid rgba(204,166,79,0.25)' }}>
+                      <Icon size={18} className="text-gold" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium text-text-warm uppercase tracking-wider mb-0.5">{label}</div>
+                      <div className="text-ivory text-sm font-medium group-hover:text-gold-light transition-colors">{value}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-xs font-medium text-text-warm uppercase tracking-wider mb-0.5">{label}</div>
-                    <div className="text-ivory text-sm font-medium">{value}</div>
-                  </div>
-                </div>
-              ))}
+                )
+                return link ? (
+                  <a key={i} href={link} target="_blank" rel="noopener noreferrer" className="block">
+                    {content}
+                  </a>
+                ) : (
+                  <div key={i}>{content}</div>
+                )
+              })}
             </div>
 
             {/* Placeholder Google Maps — Oran */}

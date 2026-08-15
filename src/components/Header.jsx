@@ -85,8 +85,8 @@ export default function Header() {
 
             {/* ---- Actions Desktop ---- */}
             <div className="hidden xl:flex items-center gap-3">
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light p-1"><InstagramIcon size={18} /></a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light p-1"><FacebookIcon size={18} /></a>
+              <a href="https://www.instagram.com/location_de_voiture_didano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light p-1" aria-label="Instagram"><InstagramIcon size={18} /></a>
+              <a href="https://www.facebook.com/Didano31?locale=fr_FR" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light p-1" aria-label="Facebook"><FacebookIcon size={18} /></a>
               <div className="w-px h-4 bg-gold/20 mx-1" />
               <a href="#/admin/login" className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/40 text-gold-light hover:bg-gold/20 transition-all flex items-center gap-1"><Lock size={12} /><span>Admin</span></a>
               <button onClick={toggleLang} className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-all"><span>{lang === 'fr' ? '🇩🇿 AR' : '🇫🇷 FR'}</span></button>
@@ -138,8 +138,8 @@ export default function Header() {
 
               <div className="flex items-center justify-between pt-3">
                 <div className="flex items-center gap-3">
-                  <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><InstagramIcon size={16} /></a>
-                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><FacebookIcon size={16} /></a>
+                  <a href="https://www.instagram.com/location_de_voiture_didano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold" aria-label="Instagram"><InstagramIcon size={16} /></a>
+                  <a href="https://www.facebook.com/Didano31?locale=fr_FR" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold" aria-label="Facebook"><FacebookIcon size={16} /></a>
                 </div>
 
                 <a

@@ -51,9 +51,9 @@ export default function Footer() {
             </p>
             {/* Contact rapide */}
             <div className="space-y-2">
-              <a href="tel:+213550000000"
+              <a href="tel:+213770366405"
                 className="flex items-center gap-2 text-text-warm hover:text-gold-light transition-colors text-sm">
-                <Phone size={14} className="text-gold" />+213 5 50 00 00 00
+                <Phone size={14} className="text-gold" />+213 770 36 64 05
               </a>
               <a href="mailto:contact@didanoluxecars.dz"
                 className="flex items-center gap-2 text-text-warm hover:text-gold-light transition-colors text-sm">
@@ -95,7 +95,7 @@ export default function Footer() {
             </h3>
             <div className="flex gap-4 mb-8">
               <motion.a
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/location_de_voiture_didano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw=="
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -106,7 +106,7 @@ export default function Footer() {
                 <InstagramIcon size={20} className="text-gold" />
               </motion.a>
               <motion.a
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/Didano31?locale=fr_FR"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
