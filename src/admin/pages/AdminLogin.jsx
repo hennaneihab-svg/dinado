@@ -23,7 +23,6 @@ export default function AdminLogin() {
     // Simulation délai réseau
     await new Promise(r => setTimeout(r, 700))
     setLoading(false)
-    // Accepte n'importe quelles credentials (démo) OU les identifiants fictifs
     navigate('/admin/dashboard')
   }
 

@@ -13,9 +13,11 @@ import {
 import { useState } from 'react'
 import logo from '../assets/logo/DIDANO_logo_transparent.png'
 
-export default function AdminLayout() {
+export default function AdminLayout({ children }) {
   const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false)
+  // ...
+
 
   const navItems = [
     { label: 'Tableau de bord', path: '/admin/dashboard', icon: LayoutDashboard },
@@ -137,7 +139,7 @@ export default function AdminLayout() {
 
       {/* Contenu principal */}
       <main className="flex-1 md:ml-64 p-6 md:p-10 pt-20 md:pt-10 overflow-y-auto">
-        <Outlet />
+        {children || <Outlet />}
       </main>
     </div>
   )
