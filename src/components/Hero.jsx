@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { ChevronDown, Shield, Plane, Clock, CheckCircle } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
 
+import santaCruzImg from '../assets/oran_santa_cruz.jpg'
+
 const WHATSAPP_NUMBER = '213550000000'
 
 const fadeUp = (delay = 0) => ({
@@ -25,17 +27,17 @@ export default function Hero() {
       id="accueil"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* ---- Fond : image Santa Cruz Oran (mode sombre luxe) ---- */}
+      {/* ---- Fond : image Santa Cruz Oran ---- */}
       <div className="absolute inset-0">
         <img
-          src="/dinado/oran_santa_cruz.jpg"
+          src={santaCruzImg}
           alt="Santa Cruz Oran — DIDANO LUXE CARS"
-          className="w-full h-full object-cover object-center scale-105 filter brightness-50 contrast-125 saturate-90"
+          className="w-full h-full object-cover object-center scale-105 filter brightness-90 contrast-110"
           loading="eager"
         />
-        {/* Multilayer dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0705]/90 via-[#0F0705]/70 to-[#0F0705]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0705]/95 via-[#0F0705]/60 to-[#0F0705]/80" />
+        {/* Subtle dark gradient overlay for optimal text contrast without hiding the picture */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0705]/65 via-[#0F0705]/40 to-[#0F0705]/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0705]/75 via-transparent to-[#0F0705]/40" />
       </div>
 
       {/* ---- Particules décoratives dorées ---- */}
