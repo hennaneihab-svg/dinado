@@ -1,6 +1,6 @@
 import { LanguageProvider } from './context/LanguageContext'
 import { ToastProvider } from './context/ToastContext'
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 // Public components
 import Header         from './components/Header'
@@ -50,12 +50,15 @@ export default function App() {
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminLayout><DashboardHome /></AdminLayout>} />
-          <Route path="/admin/vehicles" element={<AdminLayout><VehiclesPage /></AdminLayout>} />
-          <Route path="/admin/reservations" element={<AdminLayout><ReservationsPage /></AdminLayout>} />
-          <Route path="/admin/clients" element={<AdminLayout><ClientsPage /></AdminLayout>} />
-          <Route path="/admin/settings" element={<AdminLayout><SettingsPage /></AdminLayout>} />
-          <Route path="/admin" element={<AdminLayout><DashboardHome /></AdminLayout>} />
+          
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<DashboardHome />} />
+            <Route path="dashboard" element={<DashboardHome />} />
+            <Route path="vehicles" element={<VehiclesPage />} />
+            <Route path="reservations" element={<ReservationsPage />} />
+            <Route path="clients" element={<ClientsPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+          </Route>
 
           {/* Fallback Site Public */}
           <Route path="*" element={<PublicSite />} />

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, Outlet } from 'react'
+import { NavLink, useNavigate, Outlet } from 'react-router-dom'
 import { 
   LayoutDashboard, 
   Car, 
@@ -13,11 +13,9 @@ import {
 import { useState } from 'react'
 import logo from '../assets/logo/DIDANO_logo_transparent.png'
 
-export default function AdminLayout({ children }) {
+export default function AdminLayout() {
   const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false)
-  // ...
-
 
   const navItems = [
     { label: 'Tableau de bord', path: '/admin/dashboard', icon: LayoutDashboard },
@@ -42,7 +40,7 @@ export default function AdminLayout({ children }) {
 
         {/* Bouton Retour public */}
         <a
-          href="/"
+          href="#/"
           className="flex items-center gap-2 px-4 py-2.5 mb-6 rounded-xl text-xs font-semibold uppercase tracking-wider text-[#CCA64F] bg-[#0F0705] border border-[#CCA64F]/30 hover:bg-[#CCA64F]/10 transition-colors"
         >
           <Globe size={16} />
@@ -98,7 +96,7 @@ export default function AdminLayout({ children }) {
         <div className="md:hidden fixed inset-0 z-30 bg-[#0F0705]/80 backdrop-blur-sm" onClick={() => setMobileOpen(false)}>
           <div className="w-64 bg-[#291D14] h-full p-6 flex flex-col border-r border-[#9E7C3D]/20 pt-20" onClick={e => e.stopPropagation()}>
             <a
-              href="/"
+              href="#/"
               className="flex items-center gap-2 px-4 py-2.5 mb-6 rounded-xl text-xs font-semibold text-[#CCA64F] bg-[#0F0705] border border-[#CCA64F]/30"
             >
               <Globe size={16} />
@@ -139,7 +137,7 @@ export default function AdminLayout({ children }) {
 
       {/* Contenu principal */}
       <main className="flex-1 md:ml-64 p-6 md:p-10 pt-20 md:pt-10 overflow-y-auto">
-        {children || <Outlet />}
+        <Outlet />
       </main>
     </div>
   )
