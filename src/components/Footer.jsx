@@ -138,7 +138,10 @@ export default function Footer() {
       <div className="border-t border-gold/8 py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-text-warm">
           <span>{t.footer.copyright}</span>
-          <a href="#" className="hover:text-gold-light transition-colors">{t.footer.legal}</a>
+          <div className="flex items-center gap-4">
+            <a href="#/admin/login" className="text-gold/60 hover:text-gold transition-colors font-medium">🔑 Espace Admin</a>
+            <a href="#" className="hover:text-gold-light transition-colors">{t.footer.legal}</a>
+          </div>
         </div>
       </div>
     </footer>
