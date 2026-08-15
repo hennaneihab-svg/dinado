@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Shield, Lock } from 'lucide-react'
+import { Menu, X, Lock } from 'lucide-react'
 import { useLang } from '../context/LanguageContext'
 
 // SVG réseaux sociaux
@@ -34,7 +34,7 @@ export default function Header() {
   const [mobileOpen,   setMobileOpen]   = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 30)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -49,28 +49,27 @@ export default function Header() {
       <motion.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#0F0705]/95 backdrop-blur-xl border-b border-[#9E7C3D]/25 shadow-xl shadow-black/50 py-2'
-            : 'bg-gradient-to-b from-[#0F0705]/90 via-[#0F0705]/50 to-transparent py-3 md:py-4'
+            ? 'bg-[#0F0705]/95 backdrop-blur-xl border-b border-[#9E7C3D]/30 shadow-2xl py-2'
+            : 'bg-gradient-to-b from-[#0F0705]/95 via-[#0F0705]/60 to-transparent py-2.5 sm:py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 md:h-16">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-12 sm:h-14 md:h-16 gap-2">
 
-            {/* ---- Logo Responsive ---- */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="flex-shrink-0 cursor-pointer flex items-center"
+            {/* ---- Logo Responsive (Fixé pour ne jamais déborder) ---- */}
+            <div
+              className="flex-shrink cursor-pointer flex items-center min-w-0"
               onClick={() => handleNav('#accueil')}
             >
               <img
                 src={logo}
-                alt="DIDANO LUXE CARS - Oran"
-                className="h-10 sm:h-12 md:h-14 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(204,166,79,0.4)]"
+                alt="DIDANO LUXE CARS"
+                className="h-8 sm:h-11 md:h-14 w-auto max-w-[150px] sm:max-w-none object-contain filter drop-shadow-[0_2px_8px_rgba(204,166,79,0.4)]"
               />
-            </motion.div>
+            </div>
 
             {/* ---- Navigation Desktop ---- */}
             <nav className="hidden lg:flex items-center gap-7">
@@ -88,101 +87,61 @@ export default function Header() {
 
             {/* ---- Actions Desktop ---- */}
             <div className="hidden lg:flex items-center gap-3">
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-warm hover:text-gold-light transition-colors p-1"
-                aria-label="Instagram"
-              >
-                <InstagramIcon size={18} />
-              </a>
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-warm hover:text-gold-light transition-colors p-1"
-                aria-label="Facebook"
-              >
-                <FacebookIcon size={18} />
-              </a>
-
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light p-1"><InstagramIcon size={18} /></a>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-text-warm hover:text-gold-light p-1"><FacebookIcon size={18} /></a>
               <div className="w-px h-4 bg-gold/20 mx-1" />
-
-              <a
-                href="#/admin/login"
-                className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/40 text-gold-light hover:bg-gold/20 transition-all flex items-center gap-1"
-              >
-                <Lock size={12} />
-                <span>Admin</span>
-              </a>
-
-              <button
-                onClick={toggleLang}
-                className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-all"
-              >
-                <span>{lang === 'fr' ? '🇩🇿 AR' : '🇫🇷 FR'}</span>
-              </button>
-
-              <motion.a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20v%C3%A9hicule%20chez%20DIDANO%20LUXE%20CARS`}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="btn-gold text-xs font-semibold px-4 py-2"
-              >
-                {t.nav.reserve}
-              </motion.a>
+              <a href="#/admin/login" className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/40 text-gold-light hover:bg-gold/20 transition-all flex items-center gap-1"><Lock size={12} /><span>Admin</span></a>
+              <button onClick={toggleLang} className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-all"><span>{lang === 'fr' ? '🇩🇿 AR' : '🇫🇷 FR'}</span></button>
+              <motion.a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20v%C3%A9hicule%20chez%20DIDANO%20LUXE%20CARS`} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="btn-gold text-xs font-semibold px-4 py-2">{t.nav.reserve}</motion.a>
             </div>
 
-            {/* ---- Actions Compactes Mobile (Langue + Hamburger) ---- */}
-            <div className="flex items-center gap-2 lg:hidden">
+            {/* ---- Actions Mobile Épurées (Empêche tout chevauchement) ---- */}
+            <div className="flex items-center gap-1.5 flex-shrink-0 lg:hidden">
               <button
                 onClick={toggleLang}
-                className="text-[11px] font-bold uppercase px-2.5 py-1 rounded-full border border-gold/40 text-gold bg-gold/5"
+                className="text-[10px] font-bold uppercase px-2 py-1 rounded-full border border-gold/40 text-gold bg-gold/10 hover:bg-gold/20 transition-colors"
               >
                 {lang === 'fr' ? 'AR' : 'FR'}
               </button>
 
               <button
-                className="text-ivory p-2 rounded-xl border border-gold/20 bg-dark-bg/80 hover:bg-gold/10 transition-colors"
+                className="text-gold p-1.5 rounded-lg border border-gold/30 bg-[#291D14]/90 active:scale-95 transition-all"
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label="Menu"
               >
-                {mobileOpen ? <X size={22} className="text-gold" /> : <Menu size={22} className="text-gold" />}
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
       </motion.header>
 
-      {/* ---- Menu Mobile Pliable et bien dimensionné ---- */}
+      {/* ---- Menu Mobile Pliable Propre ---- */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed top-16 left-0 right-0 z-40 bg-[#0F0705]/98 backdrop-blur-2xl border-b border-[#9E7C3D]/30 lg:hidden shadow-2xl overflow-hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-12 sm:top-14 left-0 right-0 z-40 bg-[#0F0705]/98 backdrop-blur-2xl border-b border-[#9E7C3D]/40 lg:hidden shadow-2xl"
           >
-            <div className="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-3">
-              {navLinks.map((link, i) => (
+            <div className="px-5 py-4 flex flex-col gap-2">
+              {navLinks.map((link) => (
                 <button
                   key={link.key}
                   onClick={() => handleNav(link.href)}
-                  className="text-left text-ivory text-base font-medium py-2.5 border-b border-gold/10 hover:text-gold-light transition-colors flex items-center justify-between"
+                  className="text-left text-ivory text-sm font-medium py-2.5 border-b border-gold/10 hover:text-gold flex items-center justify-between"
                 >
                   <span>{t.nav[link.key]}</span>
                   <span className="text-gold/40 text-xs">→</span>
                 </button>
               ))}
 
-              <div className="flex items-center justify-between pt-2">
+              <div className="flex items-center justify-between pt-3">
                 <div className="flex items-center gap-3">
-                  <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><InstagramIcon size={18} /></a>
-                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><FacebookIcon size={18} /></a>
+                  <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><InstagramIcon size={16} /></a>
+                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-gold/10 text-gold"><FacebookIcon size={16} /></a>
                 </div>
 
                 <a
@@ -195,14 +154,14 @@ export default function Header() {
                 </a>
               </div>
 
-              <motion.a
+              <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20v%C3%A9hicule%20chez%20DIDANO%20LUXE%20CARS`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold w-full text-center text-sm font-semibold py-3 mt-2"
+                className="btn-gold w-full text-center text-xs font-bold py-3 mt-2"
               >
                 {t.nav.reserve}
-              </motion.a>
+              </a>
             </div>
           </motion.div>
         )}
