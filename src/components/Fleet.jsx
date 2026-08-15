@@ -4,11 +4,15 @@ import { Users, Settings, Wind, Calendar, CheckCircle2, AlertCircle, X, ShieldCh
 import { useLang } from '../context/LanguageContext'
 
 // Import images véhicules
-import imgDuster  from '../assets/vehicles/dacia_duster.jpg'
-import imgP208    from '../assets/vehicles/peugeot_208.jpg'
-import imgGolf    from '../assets/vehicles/vw_golf.jpg'
-import imgKodiaq  from '../assets/vehicles/skoda_kodiaq.jpg'
-import imgTiguan  from '../assets/vehicles/vw_tiguan.jpg'
+import imgDuster   from '../assets/vehicles/dacia_duster.jpg'
+import imgP208     from '../assets/vehicles/peugeot_208.jpg'
+import imgGolf     from '../assets/vehicles/vw_golf.jpg'
+import imgKodiaq   from '../assets/vehicles/skoda_kodiaq.jpg'
+import imgTiguan   from '../assets/vehicles/vw_tiguan.jpg'
+import imgMacan    from '../assets/vehicles/porsche_macan.jpg'
+import imgEvoque   from '../assets/vehicles/range_evoque.jpg'
+import imgGClass   from '../assets/vehicles/mercedes_gclass.jpg'
+import imgAudiA6   from '../assets/vehicles/audi_a6.jpg'
 
 // ---- Catalogue véhicules avec statut de disponibilité ----
 const initialVehicles = [
@@ -19,7 +23,7 @@ const initialVehicles = [
     price:    3500,
     seats:    5,
     gearbox:  'manual',
-    status:   'available', // disponible
+    status:   'available',
     image:    imgDuster,
     alt:      'Location Dacia Duster Oran Algérie',
   },
@@ -30,20 +34,20 @@ const initialVehicles = [
     price:    3000,
     seats:    5,
     gearbox:  'manual',
-    status:   'rented', // loué
+    status:   'rented',
     image:    imgP208,
     alt:      'Location Peugeot 208 Oran',
   },
   {
     id:       3,
-    name:     'Volkswagen Golf',
+    name:     'Volkswagen Golf 8 R-Line',
     category: 'confort',
-    price:    5500,
+    price:    6000,
     seats:    5,
     gearbox:  'auto',
     status:   'available',
     image:    imgGolf,
-    alt:      'Location Volkswagen Golf Oran Algérie',
+    alt:      'Location Volkswagen Golf 8 Oran Algérie',
   },
   {
     id:       4,
@@ -69,14 +73,14 @@ const initialVehicles = [
   },
   {
     id:       6,
-    name:     'Porsche Macan',
+    name:     'Porsche Macan GTS',
     category: 'luxe',
     price:   14000,
     seats:    5,
     gearbox:  'auto',
     status:   'available',
-    image:    null,
-    alt:      'Location Porsche Macan luxe Oran Algérie',
+    image:    imgMacan,
+    alt:      'Location Porsche Macan GTS Oran Algérie',
   },
   {
     id:       7,
@@ -86,8 +90,30 @@ const initialVehicles = [
     seats:    5,
     gearbox:  'auto',
     status:   'rented',
-    image:    null,
+    image:    imgEvoque,
     alt:      'Location Range Rover Evoque luxe Oran',
+  },
+  {
+    id:       8,
+    name:     'Mercedes-Benz G63 AMG',
+    category: 'luxe',
+    price:   25000,
+    seats:    5,
+    gearbox:  'auto',
+    status:   'available',
+    image:    imgGClass,
+    alt:      'Location Mercedes G-Class AMG Oran',
+  },
+  {
+    id:       9,
+    name:     'Audi A6 S-Line',
+    category: 'confort',
+    price:    9000,
+    seats:    5,
+    gearbox:  'auto',
+    status:   'available',
+    image:    imgAudiA6,
+    alt:      'Location Audi A6 S-Line Oran Algérie',
   },
 ]
 

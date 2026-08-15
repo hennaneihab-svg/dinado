@@ -4,8 +4,30 @@ import { Plus, Edit, Trash2, X, Car, Upload, Image as ImageIcon } from 'lucide-r
 import { mockVehicles } from '../../data/mockData'
 import { useToast } from '../../context/ToastContext'
 
+import imgDuster   from '../../assets/vehicles/dacia_duster.jpg'
+import imgP208     from '../../assets/vehicles/peugeot_208.jpg'
+import imgGolf     from '../../assets/vehicles/vw_golf.jpg'
+import imgKodiaq   from '../../assets/vehicles/skoda_kodiaq.jpg'
+import imgTiguan   from '../../assets/vehicles/vw_tiguan.jpg'
+import imgMacan    from '../../assets/vehicles/porsche_macan.jpg'
+import imgEvoque   from '../../assets/vehicles/range_evoque.jpg'
+import imgGClass   from '../../assets/vehicles/mercedes_gclass.jpg'
+import imgAudiA6   from '../../assets/vehicles/audi_a6.jpg'
+
+const initialVehicles = [
+  { id: 1,  name: 'Dacia Duster',            category: 'eco',     price: 3500,  status: 'available',   image: imgDuster,  seats: 5, gearbox: 'Manuelle' },
+  { id: 2,  name: 'Peugeot 208',             category: 'eco',     price: 3000,  status: 'rented',      image: imgP208,    seats: 5, gearbox: 'Manuelle' },
+  { id: 3,  name: 'Volkswagen Golf 8 R-Line', category: 'confort', price: 6000,  status: 'available',   image: imgGolf,    seats: 5, gearbox: 'Automatique' },
+  { id: 4,  name: 'Škoda Kodiaq',            category: 'suv',     price: 7500,  status: 'rented',      image: imgKodiaq,  seats: 7, gearbox: 'Automatique' },
+  { id: 5,  name: 'Volkswagen Tiguan',       category: 'suv',     price: 7000,  status: 'maintenance', image: imgTiguan,  seats: 5, gearbox: 'Automatique' },
+  { id: 6,  name: 'Porsche Macan GTS',       category: 'luxe',    price: 14000, status: 'available',   image: imgMacan,   seats: 5, gearbox: 'Automatique' },
+  { id: 7,  name: 'Range Rover Evoque',      category: 'luxe',    price: 15000, status: 'rented',      image: imgEvoque,  seats: 5, gearbox: 'Automatique' },
+  { id: 8,  name: 'Mercedes-Benz G63 AMG',    category: 'luxe',    price: 25000, status: 'available',   image: imgGClass,  seats: 5, gearbox: 'Automatique' },
+  { id: 9,  name: 'Audi A6 S-Line',          category: 'confort', price: 9000,  status: 'available',   image: imgAudiA6,  seats: 5, gearbox: 'Automatique' },
+]
+
 export default function VehiclesPage() {
-  const [vehicles, setVehicles] = useState(mockVehicles)
+  const [vehicles, setVehicles] = useState(initialVehicles)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingVehicle, setEditingVehicle] = useState(null)
 

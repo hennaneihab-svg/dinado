@@ -3,13 +3,15 @@
 // ============================================================
 
 export const mockVehicles = [
-  { id: 1,  name: 'Dacia Duster',       category: 'eco',     price: 3500,  status: 'available',    image: '/assets/vehicles/dacia_duster.jpg',   seats: 5, gearbox: 'Manuelle' },
-  { id: 2,  name: 'Peugeot 208',        category: 'eco',     price: 3000,  status: 'rented',       image: '/assets/vehicles/peugeot_208.jpg',    seats: 5, gearbox: 'Manuelle' },
-  { id: 3,  name: 'Volkswagen Golf',    category: 'confort', price: 5500,  status: 'available',    image: '/assets/vehicles/vw_golf.jpg',         seats: 5, gearbox: 'Automatique' },
-  { id: 4,  name: 'Škoda Kodiaq',       category: 'suv',     price: 7500,  status: 'rented',       image: '/assets/vehicles/skoda_kodiaq.jpg',   seats: 7, gearbox: 'Automatique' },
-  { id: 5,  name: 'Volkswagen Tiguan',  category: 'suv',     price: 7000,  status: 'maintenance',  image: '/assets/vehicles/vw_tiguan.jpg',       seats: 5, gearbox: 'Automatique' },
-  { id: 6,  name: 'Porsche Macan',      category: 'luxe',    price: 14000, status: 'available',    image: null,                                   seats: 5, gearbox: 'Automatique' },
-  { id: 7,  name: 'Range Rover Evoque', category: 'luxe',    price: 15000, status: 'rented',       image: null,                                   seats: 5, gearbox: 'Automatique' },
+  { id: 1,  name: 'Dacia Duster',            category: 'eco',     price: 3500,  status: 'available',    image: '/dinado/assets/dacia_duster-B3VM5mKH.jpg',   seats: 5, gearbox: 'Manuelle' },
+  { id: 2,  name: 'Peugeot 208',             category: 'eco',     price: 3000,  status: 'rented',       image: '/dinado/assets/peugeot_208-CiJvf3Wd.jpg',    seats: 5, gearbox: 'Manuelle' },
+  { id: 3,  name: 'Volkswagen Golf 8 R-Line', category: 'confort', price: 6000,  status: 'available',    image: null,                                         seats: 5, gearbox: 'Automatique' },
+  { id: 4,  name: 'Škoda Kodiaq',            category: 'suv',     price: 7500,  status: 'rented',       image: '/dinado/assets/skoda_kodiaq-C1fooDwI.jpg',   seats: 7, gearbox: 'Automatique' },
+  { id: 5,  name: 'Volkswagen Tiguan',       category: 'suv',     price: 7000,  status: 'maintenance',  image: '/dinado/assets/vw_tiguan-CqZEyqYM.jpg',       seats: 5, gearbox: 'Automatique' },
+  { id: 6,  name: 'Porsche Macan GTS',       category: 'luxe',    price: 14000, status: 'available',    image: null,                                         seats: 5, gearbox: 'Automatique' },
+  { id: 7,  name: 'Range Rover Evoque',      category: 'luxe',    price: 15000, status: 'rented',       image: null,                                         seats: 5, gearbox: 'Automatique' },
+  { id: 8,  name: 'Mercedes-Benz G63 AMG',    category: 'luxe',    price: 25000, status: 'available',    image: null,                                         seats: 5, gearbox: 'Automatique' },
+  { id: 9,  name: 'Audi A6 S-Line',          category: 'confort', price: 9000,  status: 'available',    image: null,                                         seats: 5, gearbox: 'Automatique' },
 ]
 
 export const mockReservations = [
